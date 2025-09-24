@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfólio - Carolina Passos (Etapa 03 - Flexbox & Grid)</title>
+  <style>
+    :root{
+      --bg:#f7f7f7; --text:#2b2b2b; --muted:#666;
+      --primary:#0f766e; --surface:#fff; --radius:16px;
+      --shadow:0 10px 28px rgba(0,0,0,.07);
+    }
+    *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
+    body{background:var(--bg);color:var(--text);line-height:1.6}
+    .container{max-width:1100px;margin:0 auto;padding:20px}
+
+    /* HEADER (container + flex) */
+    header{background:linear-gradient(135deg,#0ea5a4, #0f766e);color:#fff}
+    .header-wrap{display:flex;align-items:center;justify-content:space-between;gap:18px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .brand img{width:72px;height:72px;border-radius:14px;box-shadow:var(--shadow)}
+    .brand h1{font-size:clamp(22px,3.2vw,34px)}
+    .subtitle{opacity:.9;font-size:14px}
+
+    /* NAV (flex) */
+    nav{background:#0f766e}
+    .menu{list-style:none;display:flex;flex-wrap:wrap;gap:18px;justify-content:center;padding:12px 0}
+    .menu a{color:#fff;text-decoration:none;font-weight:700;padding:8px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.25)}
+    .menu a:hover{background:#0ea5a4}
+
+    /* HERO/APRESENTAÇÃO (flex) */
+    .apresentacao{display:flex;gap:24px;align-items:center;background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;margin-top:22px}
+    .apresentacao img{width:160px;height:160px;border-radius:50%;object-fit:cover;border:4px solid #fff;box-shadow:0 12px 24px rgba(0,0,0,.08)}
+    .apresentacao h2{color:var(--primary);margin-bottom:6px}
+
+    /* SOBRE (card) */
+    #sobre{background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;margin-top:22px}
+    #sobre h2{color:var(--primary);margin-bottom:8px}
+
+    /* PROJETOS (grid) */
+    #projetos{margin:22px 0}
+    .grid{display:grid;gap:20px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+    .grid > .card{background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow);padding:20px}
+    .grid .card h3{margin:6px 0 8px}
+    .grid .card p{color:var(--muted)}
+
+    /* CONTATO (grid) */
+    #contato .grid{margin-top:0}
+    #contato .card a{color:var(--primary);font-weight:700;text-decoration:none}
+    #contato .card a:hover{text-decoration:underline}
+    #contato h2{color:var(--primary);margin-bottom:10px}
+
+    /* FOOTER */
+    footer{background:#0e2220;color:#fff;margin-top:26px}
+    footer .footer-wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+    footer ul{list-style:none;display:flex;gap:14px;flex-wrap:wrap}
+    footer a{color:#c7fffb;text-decoration:none}
+    footer a:hover{text-decoration:underline}
+    footer p{opacity:.9}
+
+    /* RESPONSIVO */
+    @media (max-width:740px){
+      .header-wrap{flex-direction:column;justify-content:center;text-align:center}
+      .apresentacao{flex-direction:column;text-align:center}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container header-wrap">
+      <div class="brand">
+        <img src="https://i.ibb.co/Qt2y7LJ/Logotipo-para-arquiteta-moderno-minimalista-bege-e-marrom.png" alt="logo">
+        <div>
+          <h1>Carolina Passos</h1>
+          <div class="subtitle">Bem-vindo ao meu site!</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <nav>
+    <ul class="menu container">
+      <li><a href="#sobre">Sobre</a></li>
+      <li><a href="#projetos">Projetos</a></li>
+      <li><a href="#contato">Contato</a></li>
+    </ul>
+  </nav>
+
+  <main class="container">
+    <section class="apresentacao">
+      <img src="https://i.ibb.co/xK1hcDLF/Whats-App-Image-2025-09-10-at-22-42-59.jpg" alt="foto-carol">
+      <div>
+        <h2>Olá!</h2>
+        <p>Carolina Passos - Estudante de ADS | Transformando ideias em tecnologia.</p>
+      </div>
+    </section>
+
+    <section id="sobre">
+      <h2>Sobre mim</h2>
+      <p>Tenho 23 anos e sou estudante do 4º período de ADS. Tenho conhecimentos em sistemas, banco de dados e experiência em vendas. Apaixonada por tecnologia e soluções eficientes.</p>
+    </section>
+
+    <section id="projetos">
+      <h2>Projetos</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>Gerenciamento de Estacionamento</h3>
+          <p>Projeto acadêmico em Java e SQL, aplicando lógica de programação, estrutura de dados e desenvolvimento de sistemas.</p>
+        </div>
+        <div class="card">
+          <h3>Outro Projeto</h3>
+          <p>Espaço reservado para futuros projetos.</p>
+        </div>
+        <div class="card">
+          <h3>Mais um Projeto</h3>
+          <p>Descrição breve do projeto.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="contato">
+      <h2>Contato</h2>
+      <div class="grid">
+        <div class="card">
+          <p>📞 <a href="callto:(31)994344496">(31) 99434-4496</a></p>
+          <p>✉️ <a href="mailto:carolinapassos1920@gmail.com">carolinapassos1920@gmail.com</a></p>
+        </div>
+        <div class="card">
+          <p>Fique à vontade para entrar em contato para dúvidas, ideias e oportunidades.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-wrap">
+      <p>&copy; 2025 Carolina Passos. Todos os direitos reservados.</p>
+      <ul>
+        <li><a href="https://wa.me/5531994344496?text=Ol%C3%A1%2C%20vim%20pelo%20seu%20portif%C3%B3lio">WhatsApp</a></li>
+        <li><a href="https://www.instagram.com/carol.passos1/">Instagram</a></li>
+      </ul>
+    </div>
+  </footer>
+</body>
+</html>
