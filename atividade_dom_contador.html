@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manipulação do DOM + Contador</title>
+  <style>
+    :root{
+      --bg:#f7f7f8; --txt:#1f2937; --muted:#6b7280;
+      --primary:#0ea5a4; --surface:#ffffff; --border:#e5e7eb;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; font-family:system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background:var(--bg); color:var(--txt); line-height:1.5;
+    }
+    .wrap{
+      max-width:900px; margin:40px auto; padding:24px;
+      background:var(--surface); border:1px solid var(--border); border-radius:12px;
+      box-shadow:0 10px 25px rgba(0,0,0,.06);
+    }
+    h1{margin:0 0 16px}
+    p.helper{color:var(--muted); margin-top:0}
+    .row{display:flex; gap:8px; flex-wrap:wrap}
+    input[type="text"]{
+      flex:1 1 260px; padding:10px 12px; border:1px solid var(--border); border-radius:8px;
+      outline:none;
+    }
+    button{
+      padding:10px 14px; border:1px solid var(--border); background:#fff; border-radius:8px;
+      cursor:pointer;
+    }
+    button:hover{filter:brightness(0.98)}
+    #resultado{margin-top:16px; padding:12px; border:1px dashed var(--border); border-radius:8px; min-height:48px}
+    .contador{
+      margin-top:28px; padding-top:16px; border-top:1px solid var(--border);
+    }
+    .contador .valor{
+      font-size:28px; font-weight:700; margin:8px 0;
+    }
+    .contador .botoes{display:flex; gap:8px; flex-wrap:wrap}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Manipulação do DOM + Contador</h1>
+    <p class="helper">Digite uma mensagem, mostre/limpe o resultado e utilize o contador abaixo.</p>
+
+    <div class="row">
+      <input type="text" id="entrada" placeholder="Digite uma mensagem" />
+      <button id="btn-mostrar">Mostrar</button>
+      <button id="btn-limpar">Limpar</button>
+    </div>
+
+    <div id="resultado" aria-live="polite"></div>
+
+    <div class="contador" aria-labelledby="titulo-contador">
+      <h2 id="titulo-contador">Contador</h2>
+      <div id="contador" class="valor">0</div>
+      <div class="botoes">
+        <button id="btn-inc" aria-label="Incrementar">+</button>
+        <button id="btn-dec" aria-label="Decrementar">−</button>
+        <button id="btn-zero" aria-label="Zerar">Zerar</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Referências de elementos (simples e diretas)
+    const entrada    = document.getElementById('entrada');
+    const resultado  = document.getElementById('resultado');
+    const btnMostrar = document.getElementById('btn-mostrar');
+    const btnLimpar  = document.getElementById('btn-limpar');
+
+    const visorContador = document.getElementById('contador');
+    const btnInc   = document.getElementById('btn-inc');
+    const btnDec   = document.getElementById('btn-dec');
+    const btnZero  = document.getElementById('btn-zero');
+
+    // Estado do contador
+    let contador = 0;
+
+    // Atualiza o número exibido (função pequena e reutilizável)
+    function atualizarContador(){
+      visorContador.textContent = contador;
+    }
+
+    // Cria e adiciona um parágrafo com o texto digitado
+    function mostrarTexto(){
+      const valor = entrada.value.trim();
+      if(!valor){
+        // comentário simples: evita criar parágrafo vazio
+        return;
+      }
+      const p = document.createElement('p'); // cria elemento dinamicamente
+      p.textContent = 'Você digitou: ' + valor; // escreve o conteúdo
+      resultado.appendChild(p); // insere no DOM
+      entrada.value = ''; // limpa o campo após adicionar
+      entrada.focus();
+    }
+
+    // Limpa toda a área de resultado
+    function limparTexto(){
+      resultado.innerHTML = ''; // simples e direto
+    }
+
+    // Eventos (separados do HTML)
+    btnMostrar.addEventListener('click', mostrarTexto);
+    btnLimpar.addEventListener('click', limparTexto);
+
+    // Permite enviar com Enter
+    entrada.addEventListener('keydown', (ev)=>{
+      if(ev.key === 'Enter'){ mostrarTexto(); }
+    });
+
+    // Lógica do contador
+    btnInc.addEventListener('click', ()=>{ contador++; atualizarContador(); });
+    btnDec.addEventListener('click', ()=>{ contador--; atualizarContador(); });
+    btnZero.addEventListener('click', ()=>{ contador = 0; atualizarContador(); });
+  </script>
+</body>
+</html>
